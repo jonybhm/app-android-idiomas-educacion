@@ -1,0 +1,7 @@
+{
+  "name": "app-idiomas-niños",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
