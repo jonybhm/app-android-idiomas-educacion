@@ -6,8 +6,10 @@
 
 <ion-content [fullscreen]="true">
 
-    <div class="contenedor-login">
     <!-- Imágenes al costado -->
+    
+    <div class="columna">
+      
       <div class="acceso-rapido">
         <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/fotoPerfilpaciente%2Fhappy-woman-thinking-looking-at-side-at-home_jpg.png?alt=media&token=f56ce8ff-1361-47a5-b0ee-26754bb72b83" 
         alt="Inicio sesion paciente" class="boton-login-usuario" (click)="Autocompletar('usuario1')">
@@ -16,9 +18,6 @@
         <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/fotoPerfilEspecialista%2Fcv.jpg?alt=media&token=97028fa5-de42-494b-b6ba-867f9b3e2741"
         alt="Inicio sesion paciente" class="boton-login-usuario" (click)="Autocompletar('usuario3')">      
       </div>
-      
-      <div class="columna">
-        
         
         <ion-img class="logo-app" src="../../assets/icon-only.png"></ion-img>
         
@@ -36,13 +35,47 @@
           <div class="columna">
                      
             <ion-button class="center" *ngIf="!logueado" (click)="IniciarSesion()">Ingresar</ion-button>
-            <ion-button class="center" *ngIf="!logueado" (click)="Registrarse()">Registrarse</ion-button>
+            <ion-button class="center" *ngIf="!logueado" (click)="mostrarRegistro()">Registrarse</ion-button>
             <ion-button class="center" *ngIf="logueado" (click)="CerrarSesion()">Cerrar sesión</ion-button>
           </div>
           
         </ion-card>
+
+        <ion-card *ngIf="mostrarFormRegistro" style="border: 2px solid; border-color: #970000;" id="RegistroForm">
+          <ion-card-header>Registro Nuevo Usuario</ion-card-header>
+      
+          <form [formGroup]="form">
+            <ion-item>
+              <ion-label>Email:</ion-label>
+              <ion-input type="email" formControlName="correo"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Contraseña:</ion-label>
+              <ion-input type="password" formControlName="clave"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Perfil:</ion-label>
+              <ion-select formControlName="perfil">
+                <ion-select-option value="admin">admin</ion-select-option>
+                <ion-select-option value="invitado">invitado</ion-select-option>
+                <ion-select-option value="usuario">usuario</ion-select-option>
+                <ion-select-option value="tester">tester</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Sexo:</ion-label>
+              <ion-select formControlName="sexo">
+                <ion-select-option value="masculino">Masculino</ion-select-option>
+                <ion-select-option value="femenino">Femenino</ion-select-option>
+                <ion-select-option value="otro">Otro</ion-select-option>
+              </ion-select>
+            </ion-item>
+        
+            <ion-button expand="block" (click)="Registrarse()" [disabled]="form.invalid">Confirmar Registro</ion-button>
+            <ion-button expand="block" fill="clear" color="medium" (click)="mostrarRegistro()">Cancelar</ion-button>
+          </form>
+        </ion-card>
       </div>
-    </div>
 
 
     

@@ -1,29 +1,77 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Podés cambiar el color!!!
-    </ion-title>
-  </ion-toolbar>
+
 </ion-header>
 
-<ion-content [fullscreen]="true" color="{{mi_color}}">
-  <ion-card >
-    <ion-card-header>Cambiar el color de fondo</ion-card-header>
-    <ion-card-content> 
-      <ion-label>Seleccionar Color:</ion-label>
-      <ion-select #color>
-        <ion-select-option value="primary">Primary</ion-select-option>
-        <ion-select-option value="secondary">Secondary</ion-select-option>
-        <ion-select-option value="tertiary">Tertiary</ion-select-option>
-        <ion-select-option value="success">Success</ion-select-option>
-        <ion-select-option value="warning">Warning</ion-select-option>
-        <ion-select-option value="danger">Danger</ion-select-option>
-        <ion-select-option value="light">Light</ion-select-option>
-        <ion-select-option value="medium">Medium</ion-select-option>
-        <ion-select-option value="dark">Dark</ion-select-option>
-      </ion-select>
-      <ion-button color="secondary" ion-button block (click)="CambiarColor(color.value)">Cambiar Color</ion-button>
-    </ion-card-content>
-  </ion-card>
+<ion-content [fullscreen]="true">
+  <div class="columna">
+
+    <ion-fab slot="fixed" horizontal="start" vertical="top" >
+      <ion-fab-button>
+        <img [src]="bandera_seleccionada" style="width:50px; height:50px;" />
+      </ion-fab-button>
+      <ion-fab-list side="right">
+        <ion-fab-button (click)="SeleccionarIdioma('es')">
+          <img src="../../assets/idiomas/argentina.png"  />
+        </ion-fab-button>
+        <ion-fab-button (click)="SeleccionarIdioma('en')">
+          <img src="../../assets/idiomas/eeuu.png"  />
+        </ion-fab-button>
+        <ion-fab-button (click)="SeleccionarIdioma('br')">
+          <img src="../../assets/idiomas/brasil.png"  />
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+
+    <ion-fab slot="fixed" horizontal="end" vertical="top" >
+      <ion-fab-button>
+        <img [src]="tema_seleccionado" style="width:50px; height:50px;" />
+      </ion-fab-button>
+      <ion-fab-list side="right">
+        <ion-fab-button (click)="SeleccionarTema('colores')">
+          <img src="../../assets/temas/colores.png"  />
+        </ion-fab-button>
+        <ion-fab-button (click)="SeleccionarTema('numeros')">
+          <img src="../../assets/temas/numeros.png"  />
+        </ion-fab-button>
+        <ion-fab-button (click)="SeleccionarTema('animales')">
+          <img src="../../assets/temas/animales.png"  />
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </div>
+  
+  <div class="contenedor-botones">
+
+    <ion-card>
+      <ion-card-content> 
+        <img src="../../assets/animales/cabra.png" alt="sonido1"  class="boton">
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content> 
+        <img src="../../assets/animales/carpincho.png" alt="sonido2"  class="boton">
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content> 
+        <img src="../../assets/animales/pato.png" alt="sonido3"  class="boton">
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content> 
+        <img src="../../assets/animales/perro.png" alt="sonido4"  class="boton">
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content> 
+        <img src="../../assets/animales/vaca.png" alt="sonido5"  class="boton">
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content> 
+        <img src="../../assets/animales/serpiente.png" alt="sonido6"  class="boton">
+      </ion-card-content>
+    </ion-card>
+  </div>  
 </ion-content>
 

@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package io.ionic.aprendizajeIdiomas;
 
 import com.getcapacitor.BridgeActivity;
 
