@@ -41,37 +41,15 @@
   </div>
   
   <div class="contenedor-botones">
-
-    <ion-card>
-      <ion-card-content> 
-        <img src="../../assets/animales/cabra.png" alt="sonido1"  class="boton">
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-content> 
-        <img src="../../assets/animales/carpincho.png" alt="sonido2"  class="boton">
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-content> 
-        <img src="../../assets/animales/pato.png" alt="sonido3"  class="boton">
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-content> 
-        <img src="../../assets/animales/perro.png" alt="sonido4"  class="boton">
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-content> 
-        <img src="../../assets/animales/vaca.png" alt="sonido5"  class="boton">
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-content> 
-        <img src="../../assets/animales/serpiente.png" alt="sonido6"  class="boton">
-      </ion-card-content>
-    </ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let boton of botones" size="6">
+          <ion-card (click)="ejecutarSonido()">
+            <img *ngIf="boton.estado !== 'oculta'" [src]="boton.imagen">
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>  
 </ion-content>
 
