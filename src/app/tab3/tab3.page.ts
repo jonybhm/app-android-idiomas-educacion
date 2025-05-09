@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Platform } from '@ionic/angular';
 interface BotonSonido 
 {
   id: number;
   imagen: string;
   estado: 'oculta' | 'visible';
+  activo?: boolean
 }
 
 
@@ -16,13 +17,16 @@ interface BotonSonido
 })
 export class Tab3Page implements OnInit {
 
+  cantidadColumnas = '6';
 
   botones: BotonSonido[] = [];
   public bandera_seleccionada:string;
   public tema_seleccionado:string;
   public imagenes:[string,string,string,string,string,string];
 
-  constructor() {
+  constructor(
+    private platform: Platform
+  ) {
     this.bandera_seleccionada = '../../assets/idiomas/argentina.png';
     this.tema_seleccionado = '../../assets/temas/animales.png';
     this.imagenes = 
@@ -37,10 +41,22 @@ export class Tab3Page implements OnInit {
   }
 
   ngOnInit(): void {
+
+    
     this.botones = [...this.imagenes]
     .map((img, idx) => ({ id: idx, imagen: img, estado: 'visible' as 'visible' }))
     .sort(() => Math.random() - 0.5);
+  
+  
+    this.VerificarOrientacion();
+
+    this.platform.resize.subscribe(() => {
+      this.VerificarOrientacion();
+    });
   }
+
+
+
 
   SeleccionarIdioma(idioma: string)
   {
@@ -108,8 +124,57 @@ export class Tab3Page implements OnInit {
     
   }
 
-  ejecutarSonido()
+  VerificarOrientacion()
   {
+    const width = this.platform.width();
+    const height = this.platform.height();
+    this.cantidadColumnas = width > height ? '4' : '6';
+  }
 
+  ejecutarSonido(boton: BotonSonido) 
+  {
+    const nombreArchivo = boton.imagen.split('/').pop()?.split('.')[0];
+  
+    if (!nombreArchivo)
+    {
+      console.error('No se pudo obtener el nombre del archivo');
+      return;
+    }
+  
+    let idioma = 'es';
+
+    if (this.bandera_seleccionada.includes('eeuu'))
+    {
+      idioma = 'en';
+    } 
+    else if (this.bandera_seleccionada.includes('brasil'))
+    {
+      idioma = 'br';
+    } 
+
+    let tema = 'animales';
+
+    if (this.tema_seleccionado.includes('colores'))
+    {
+      tema = 'colores';
+    } 
+    else if (this.tema_seleccionado.includes('numeros')) 
+    {
+      tema = 'numeros';
+    }
+
+    const rutaAudio = `../../assets/audios/${tema}/${idioma}/${nombreArchivo}.mp3`;
+  
+    console.log('Reproduciendo:', rutaAudio);
+
+    boton.activo = true;
+  
+    const audio = new Audio(rutaAudio);
+    audio.load();
+    audio.play();
+
+    audio.onended = () => {
+      boton.activo = false;
+    };
   }
 }

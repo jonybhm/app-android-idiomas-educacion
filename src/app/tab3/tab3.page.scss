@@ -44,3 +44,9 @@ ion-card-content {
     margin-top: var(--ion-safe-area-top, 0);
     margin-bottom: var(--ion-safe-area-bottom, 0);
   }
+
+  ion-card.boton-activo {
+    border: 4px solid rgb(255, 112, 112);
+    box-shadow: 0 0 20px red;
+    transition: box-shadow 0.3s ease;
+  }

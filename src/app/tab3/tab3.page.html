@@ -27,14 +27,14 @@
         <img [src]="tema_seleccionado" style="width:50px; height:50px;" />
       </ion-fab-button>
       <ion-fab-list side="right">
+        <ion-fab-button (click)="SeleccionarTema('animales')">
+          <img src="../../assets/temas/animales.png"  />
+        </ion-fab-button>
         <ion-fab-button (click)="SeleccionarTema('colores')">
           <img src="../../assets/temas/colores.png"  />
         </ion-fab-button>
         <ion-fab-button (click)="SeleccionarTema('numeros')">
           <img src="../../assets/temas/numeros.png"  />
-        </ion-fab-button>
-        <ion-fab-button (click)="SeleccionarTema('animales')">
-          <img src="../../assets/temas/animales.png"  />
         </ion-fab-button>
       </ion-fab-list>
     </ion-fab>
@@ -43,13 +43,13 @@
   <div class="contenedor-botones">
     <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let boton of botones" size="6">
-          <ion-card (click)="ejecutarSonido()">
+        <ion-col *ngFor="let boton of botones" [size]="cantidadColumnas">
+          <ion-card   [ngClass]="{'boton-activo': boton.activo}"  (click)="ejecutarSonido(boton)">
             <img *ngIf="boton.estado !== 'oculta'" [src]="boton.imagen">
           </ion-card>
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid> 
   </div>  
 </ion-content>
 
