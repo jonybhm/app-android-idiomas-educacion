@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { SpinnerService } from '../servicios/spinner.service';
+import { SonidosService } from '../servicios/sonidos.service';
 interface BotonSonido 
 {
   id: number;
@@ -25,7 +27,10 @@ export class Tab3Page implements OnInit {
   public imagenes:[string,string,string,string,string,string];
 
   constructor(
-    private platform: Platform
+    private platform: Platform,
+    
+    private spinner: SpinnerService,
+    private sonido: SonidosService
   ) {
     this.bandera_seleccionada = '../../assets/idiomas/argentina.png';
     this.tema_seleccionado = '../../assets/temas/animales.png';
@@ -42,7 +47,12 @@ export class Tab3Page implements OnInit {
 
   ngOnInit(): void {
 
-    
+    this.spinner.show();
+
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
+
     this.botones = [...this.imagenes]
     .map((img, idx) => ({ id: idx, imagen: img, estado: 'visible' as 'visible' }))
     .sort(() => Math.random() - 0.5);
@@ -60,6 +70,8 @@ export class Tab3Page implements OnInit {
 
   SeleccionarIdioma(idioma: string)
   {
+
+    this.sonido.ejecutarSonido('boton');
     if(idioma=='es')
     {
       this.bandera_seleccionada= '../../assets/idiomas/argentina.png';
@@ -76,7 +88,7 @@ export class Tab3Page implements OnInit {
 
   SeleccionarTema(tema: string)
   {
-      
+      this.sonido.ejecutarSonido('boton');
     if(tema=='colores')
     {
       this.tema_seleccionado= '../../assets/temas/colores.png';
